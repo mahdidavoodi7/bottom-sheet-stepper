@@ -1,0 +1,57 @@
+{
+  "name": "bottom-sheet-stepper",
+  "version": "0.1.4",
+  "description": "A lightweight and customizable stepper component for React Native, built on top of @gorhom/bottom-sheet. Easily manage multi-step flows in a modal bottom sheet with smooth animations and full control.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "Mehdi Davoodi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/mahdidavoodi7/bottom-sheet-stepper.git"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-gesture-handler": "~2.20.2",
+    "react-native-reanimated": "~3.16.1",
+    "@gorhom/bottom-sheet": "^5.1.2"
+  },
+  "files": [
+    "src",
+    "index.ts",
+    "README.md"
+  ],
+  "keywords": [
+    "react-native",
+    "bottom-sheet",
+    "stepper",
+    "wizard",
+    "multi-step",
+    "react-native-bottom-sheet",
+    "react-native-modal",
+    "react-native-stepper",
+    "bottom-sheet-stepper",
+    "onboarding",
+    "react-native-reanimated",
+    "gorhom",
+    "react-native-gesture-handler",
+    "react-native-component",
+    "expo"
+  ],
+  "bugs": {
+    "url": "https://github.com/mahdidavoodi7/bottom-sheet-stepper/issues"
+  },
+  "homepage": "https://github.com/mahdidavoodi7/bottom-sheet-stepper#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@expo/vector-icons": "^14.1.0",
+    "@types/react": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}
