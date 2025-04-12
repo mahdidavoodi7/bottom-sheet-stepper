@@ -1,5 +1,5 @@
 <h1 align="center">
-	bottom-sheet-stepper
+	Bottom Sheet Stepper
 </h1>
 
 A lightweight and customizable step-based component for React Native, built on top of [@gorhom/bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet). Perfect for building multi-step flows like wizards, onboarding screens, or custom forms — all in a sleek bottom sheet.
@@ -26,8 +26,6 @@ A lightweight and customizable step-based component for React Native, built on t
 - 🧠 Built-in height animation & cleanup handling
 - 🔁 Programmatic control with `present()` and `dismiss()`
 
-
-
 ## 🚀 Installation
 
 ```bash
@@ -47,22 +45,24 @@ npm install react-native-reanimated react-native-gesture-handler @gorhom/bottom-
 Then wrap your app with the necessary providers:
 
 ```tsx
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 <GestureHandlerRootView style={{ flex: 1 }}>
   <BottomSheetModalProvider>
     <App />
   </BottomSheetModalProvider>
-</GestureHandlerRootView>
+</GestureHandlerRootView>;
 ```
-
 
 ## 🧱 Usage
 
 ```tsx
-import React, { useRef } from 'react';
-import BottomSheetStepper, { BottomSheetStepperRef, StepComponentProps } from 'bottom-sheet-stepper';
+import React, { useRef } from "react";
+import BottomSheetStepper, {
+  BottomSheetStepperRef,
+  StepComponentProps,
+} from "bottom-sheet-stepper";
 
 const Step1 = ({ onNextPress }: StepComponentProps) => (
   <View>
@@ -84,27 +84,23 @@ const App = () => {
 
   return (
     <>
-      <Button title="Open Stepper" onPress={() => stepperRef.current?.present()} />
-
-      <BottomSheetStepper
-        ref={stepperRef}
-        steps={[Step1, Step2]}
+      <Button
+        title="Open Stepper"
+        onPress={() => stepperRef.current?.present()}
       />
+
+      <BottomSheetStepper ref={stepperRef} steps={[Step1, Step2]} />
     </>
   );
 };
 ```
-
-
-
-
 
 ## 📘 API Reference
 
 ### Props
 
 | Name              | Type                                                 | Description                                  |
-|-------------------|------------------------------------------------------|----------------------------------------------|
+| ----------------- | ---------------------------------------------------- | -------------------------------------------- |
 | `steps`           | `((props: StepComponentProps) => React.ReactNode)[]` | Array of step render functions               |
 | `style`           | `StyleProp<ViewStyle>`                               | Optional style applied to step container     |
 | `bottomInset`     | `number`                                             | Padding at bottom of the sheet (default: 20) |
@@ -122,8 +118,6 @@ type StepComponentProps = {
 };
 ```
 
-
-
 ## 🔧 Imperative API
 
 You can control the sheet externally via `ref`:
@@ -135,7 +129,6 @@ ref.current?.present();
 ref.current?.dismiss();
 ```
 
-
 ## 🧪 Example Use Cases
 
 - Onboarding flows
@@ -143,17 +136,11 @@ ref.current?.dismiss();
 - Multi-step modals
 - Form wizards
 
-
-
-
 ## 🛠 Built With
 
 - [@gorhom/bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet)
 - [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/)
 - [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/)
-
-
-
 
 ## 📄 License
 
