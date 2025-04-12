@@ -1,6 +1,6 @@
 {
   "name": "bottom-sheet-stepper",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A lightweight and customizable stepper component for React Native, built on top of @gorhom/bottom-sheet. Easily manage multi-step flows in a modal bottom sheet with smooth animations and full control.",
   "main": "index.js",
   "types": "index.d.ts",
