@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState, 
 import { StyleSheet, Platform, } from 'react-native';
 import { BottomSheetModal, BottomSheetView, ANIMATION_DURATION, ANIMATION_EASING, ANIMATION_CONFIGS, BottomSheetBackdrop, } from '@gorhom/bottom-sheet';
 import Animated, { FadeIn, FadeOut, useAnimatedStyle, useSharedValue, withSpring, withTiming, } from 'react-native-reanimated';
-const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizontalInset = 24 }, ref) => {
+const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizontalInset = 24, disablePanDownToClose }, ref) => {
     const [step, setStep] = useState(0);
     const height = useSharedValue(0);
     const transform = useSharedValue(0);
@@ -77,7 +77,7 @@ const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizon
             })}
       </Animated.View>);
     }, [handleClose, handlePressBack, handlePressNext, height, step, steps]);
-    return (<BottomSheetModal detached ref={bottomSheetRef} enableDynamicSizing={true} maxDynamicContentSize={100} android_keyboardInputMode="adjustResize" style={{ marginHorizontal: horizontalInset }} handleStyle={styles.bottomSheetHandle} containerStyle={styles.bottomSheetContainer} backgroundStyle={styles.bottomSheetBackground} backdropComponent={renderBackdrop} onChange={(index) => (index === -1 ? afterClosed() : undefined)}>
+    return (<BottomSheetModal detached ref={bottomSheetRef} enableDynamicSizing={true} maxDynamicContentSize={100} android_keyboardInputMode="adjustResize" style={{ marginHorizontal: horizontalInset }} handleStyle={styles.bottomSheetHandle} containerStyle={styles.bottomSheetContainer} backgroundStyle={styles.bottomSheetBackground} backdropComponent={renderBackdrop} onChange={(index) => (index === -1 ? afterClosed() : undefined)} enablePanDownToClose={disablePanDownToClose ? false : undefined}>
       <BottomSheetView style={[styles.bottomSheetView, { paddingBottom: bottomInset }]}>
         <Animated.View style={[styles.contentContainer, style, containerAnimatedStyle]}>
           <Animated.View style={[styles.animatedBox, animatedStyle]}>

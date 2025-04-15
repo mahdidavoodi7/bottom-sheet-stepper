@@ -14,6 +14,7 @@ export type BottomSheetStepperProps = {
     style?: StyleProp<ViewStyle>;
     bottomInset?: number;
     horizontalInset?: number;
+    disablePanDownToClose?: boolean;
 };
 declare const BottomSheetStepper: React.ForwardRefExoticComponent<BottomSheetStepperProps & React.RefAttributes<BottomSheetStepperRef>>;
 export default BottomSheetStepper;
