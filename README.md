@@ -105,6 +105,7 @@ const App = () => {
 | `style`           | `StyleProp<ViewStyle>`                               | Optional style applied to step container     |
 | `bottomInset`     | `number`                                             | Padding at bottom of the sheet (default: 20) |
 | `horizontalInset` | `number`                                             | Horizontal margin of the sheet (default: 24) |
+| `disablePanDownToClose` | `boolean`                                             | Disabling the pan to close gesture |
 
 ### Step Props (`StepComponentProps`)
 

@@ -45,12 +45,13 @@ export type BottomSheetStepperProps = {
   style?: StyleProp<ViewStyle>;
   bottomInset?: number;
   horizontalInset?: number;
+  disablePanDownToClose?: boolean;
 };
 
 const BottomSheetStepper = forwardRef<
   BottomSheetStepperRef,
   BottomSheetStepperProps
->(({ steps, style, bottomInset = 20, horizontalInset = 24 }, ref) => {
+>(({ steps, style, bottomInset = 20, horizontalInset = 24, disablePanDownToClose }, ref) => {
   const [step, setStep] = useState(0);
   const height = useSharedValue(0);
   const transform = useSharedValue(0);
@@ -96,9 +97,9 @@ const BottomSheetStepper = forwardRef<
         Platform.OS === 'ios'
           ? withSpring(height.value, ANIMATION_CONFIGS)
           : withTiming(height.value, {
-              duration: ANIMATION_DURATION,
-              easing: ANIMATION_EASING,
-            }),
+            duration: ANIMATION_DURATION,
+            easing: ANIMATION_EASING,
+          }),
     };
   });
 
@@ -110,9 +111,9 @@ const BottomSheetStepper = forwardRef<
             Platform.OS === 'ios'
               ? withSpring(transform.value, ANIMATION_CONFIGS)
               : withTiming(transform.value, {
-                  duration: ANIMATION_DURATION,
-                  easing: ANIMATION_EASING,
-                }),
+                duration: ANIMATION_DURATION,
+                easing: ANIMATION_EASING,
+              }),
         },
       ],
     };
@@ -167,6 +168,7 @@ const BottomSheetStepper = forwardRef<
       backgroundStyle={styles.bottomSheetBackground}
       backdropComponent={renderBackdrop}
       onChange={(index: number) => (index === -1 ? afterClosed() : undefined)}
+      enablePanDownToClose={disablePanDownToClose ? false : undefined}
     >
       <BottomSheetView
         style={[styles.bottomSheetView, { paddingBottom: bottomInset }]}
