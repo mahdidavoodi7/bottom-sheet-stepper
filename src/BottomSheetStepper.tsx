@@ -46,12 +46,13 @@ export type BottomSheetStepperProps = {
   bottomInset?: number;
   horizontalInset?: number;
   disablePanDownToClose?: boolean;
+  disableBackDropPressToClose?: boolean;
 };
 
 const BottomSheetStepper = forwardRef<
   BottomSheetStepperRef,
   BottomSheetStepperProps
->(({ steps, style, bottomInset = 20, horizontalInset = 24, disablePanDownToClose }, ref) => {
+>(({ steps, style, bottomInset = 20, horizontalInset = 24, disablePanDownToClose, disableBackDropPressToClose }, ref) => {
   const [step, setStep] = useState(0);
   const height = useSharedValue(0);
   const transform = useSharedValue(0);
@@ -125,7 +126,7 @@ const BottomSheetStepper = forwardRef<
         {...backdropProps}
         disappearsOnIndex={-1}
         appearsOnIndex={0}
-        onPress={handleClose}
+        onPress={disableBackDropPressToClose ? undefined : handleClose}
       />
     ),
     [handleClose]

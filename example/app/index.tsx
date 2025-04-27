@@ -35,6 +35,8 @@ export default function HomeScreen() {
       <BottomSheetStepper
         ref={stepperRef}
         steps={[Step1Wrapper, Step2Wrapper]}
+        disableBackDropPressToClose
+        disablePanDownToClose
       />
     </View>
   );
