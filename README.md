@@ -106,6 +106,7 @@ const App = () => {
 | `bottomInset`     | `number`                                             | Padding at bottom of the sheet (default: 20) |
 | `horizontalInset` | `number`                                             | Horizontal margin of the sheet (default: 24) |
 | `disablePanDownToClose` | `boolean`                                             | Disabling the pan to close gesture |
+| `disableBackDropPressToClose` | `boolean`                                             | Disabling the background press closing the modal |
 
 ### Step Props (`StepComponentProps`)
 
