@@ -1,6 +1,6 @@
 {
   "name": "bottom-sheet-stepper",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Bottom Sheet Stepper: the self-resizing multi-step bottom sheet you see across modern fintech and crypto apps rebuilt in React Native + Expo. A free drop from https://motionary.dev",
   "main": "index.js",
   "types": "index.d.ts",
