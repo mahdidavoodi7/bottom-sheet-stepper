@@ -1,48 +1,26 @@
-<h1 align="center">
-	Bottom Sheet Stepper
-</h1>
+# Bottom Sheet Stepper
 
-A lightweight and customizable step-based component for React Native, built on top of [@gorhom/bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet). Perfect for building multi-step flows like wizards, onboarding screens, or custom forms — all in a sleek bottom sheet.
+The self-resizing, multi-step bottom sheet you see across modern fintech and crypto apps, rebuilt in React Native + Expo.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="expo-image-compare is released under the MIT license." />
-  <a href="https://www.npmjs.org/package/bottom-sheet-stepper">
-    <img src="https://img.shields.io/npm/v/bottom-sheet-stepper" alt="Current npm package version." />
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=mehdi_made">
-    <img src="https://img.shields.io/twitter/follow/mehdi_made.svg?label=Follow%20@mehdi_made" alt="Follow @mehdi_made" />
-  </a>
-</p>
+A free drop from **Motionary**. The whole flock lives at **https://motionary.dev**.
 
 <p align="center">
   <img src="https://github.com/mahdidavoodi7/bottom-sheet-stepper/blob/main/preview.gif?raw=true" alt="Preview" />
 </p>
 
-## ✨ Features
+## How it works
 
-- 🎯 Multi-step navigation with `onNextPress`, `onBackPress`, and optional `onEnd`
-- 📱 Smooth animations with `react-native-reanimated`
-- 🧩 Fully customizable styles and layout
-- 🧠 Built-in height animation & cleanup handling
-- 🔁 Programmatic control with `present()` and `dismiss()`
+The whole trick is measuring each step and animating to it. Every step reports its height through `onLayout`, and Reanimated drives the sheet to that exact height (a spring on iOS, a timing curve on Android) so the card grows and shrinks to fit whatever is inside. Step content cross-fades with `FadeIn` and `FadeOut`, while `@gorhom/bottom-sheet` and `react-native-gesture-handler` handle the sheet, the backdrop, and pan-to-close. No Skia, no layout jank, just a floating card that resizes like it knows where it's going.
 
-## 🚀 Installation
+## Use it
 
-```bash
-npm install bottom-sheet-stepper
-# or
-yarn add bottom-sheet-stepper
-```
-
-### Peer Dependencies
-
-Make sure you have the following installed in your project:
+Grab [`BottomSheetStepper.tsx`](src/BottomSheetStepper.tsx) and drop it into your project, then install the peer deps it leans on:
 
 ```bash
 npm install react-native-reanimated react-native-gesture-handler @gorhom/bottom-sheet
 ```
 
-Then wrap your app with the necessary providers:
+Wrap your app once so the sheet has somewhere to live:
 
 ```tsx
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -55,10 +33,11 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 </GestureHandlerRootView>;
 ```
 
-## 🧱 Usage
+Hand it your steps and call `present()`:
 
 ```tsx
-import React, { useRef } from "react";
+import { useRef } from "react";
+import { View, Text, Button } from "react-native";
 import BottomSheetStepper, {
   BottomSheetStepperRef,
   StepComponentProps,
@@ -84,66 +63,36 @@ const App = () => {
 
   return (
     <>
-      <Button
-        title="Open Stepper"
-        onPress={() => stepperRef.current?.present()}
-      />
-
+      <Button title="Open" onPress={() => stepperRef.current?.present()} />
       <BottomSheetStepper ref={stepperRef} steps={[Step1, Step2]} />
     </>
   );
 };
 ```
 
-## 📘 API Reference
+Each step gets `onNextPress`, `onBackPress`, and an optional `onEnd`. The sheet itself takes a few props if you want to tune it:
 
-### Props
+| Prop | Type | What it does |
+| --- | --- | --- |
+| `steps` | `((props: StepComponentProps) => React.ReactNode)[]` | Your steps, in order |
+| `style` | `StyleProp<ViewStyle>` | Style for the step container |
+| `bottomInset` | `number` | Padding at the bottom (default 20) |
+| `horizontalInset` | `number` | Side margin so the card floats (default 24) |
+| `disablePanDownToClose` | `boolean` | Turn off swipe-to-close |
+| `disableBackDropPressToClose` | `boolean` | Keep taps on the backdrop from closing it |
 
-| Name              | Type                                                 | Description                                  |
-| ----------------- | ---------------------------------------------------- | -------------------------------------------- |
-| `steps`           | `((props: StepComponentProps) => React.ReactNode)[]` | Array of step render functions               |
-| `style`           | `StyleProp<ViewStyle>`                               | Optional style applied to step container     |
-| `bottomInset`     | `number`                                             | Padding at bottom of the sheet (default: 20) |
-| `horizontalInset` | `number`                                             | Horizontal margin of the sheet (default: 24) |
-| `disablePanDownToClose` | `boolean`                                             | Disabling the pan to close gesture |
-| `disableBackDropPressToClose` | `boolean`                                             | Disabling the background press closing the modal |
+You drive it through the ref with `present()` and `dismiss()`. Prefer a package over a copy? `npm install bottom-sheet-stepper` works too. That's it, it's built to be stolen from.
 
-### Step Props (`StepComponentProps`)
+## Want the rest?
 
-Passed to each step component:
+This one is free. If you want more, [motionary.dev](https://motionary.dev?utm_source=github&utm_medium=readme&utm_campaign=free_drop) has the full flock: single drops go for around $10, or grab the Lifetime All-Access pass and get every drop plus every future drop for one payment. In there you'll find things like the ChatGPT attachments menu, Apple Music lyrics, and the Flip Calendar.
 
-```ts
-type StepComponentProps = {
-  onNextPress: () => void;
-  onBackPress: () => void;
-  onEnd?: () => void;
-};
-```
+## Want a drop that doesn't exist yet?
 
-## 🔧 Imperative API
+Open an issue and tell me which interaction you wish you had. The most-requested ones get built.
 
-You can control the sheet externally via `ref`:
+## License
 
-```ts
-const ref = useRef<BottomSheetStepperRef>(null);
+MIT. Use it in anything, ship it, sell your app, no strings. If it saves you a day, a star helps other devs find this. 🐦‍⬛
 
-ref.current?.present();
-ref.current?.dismiss();
-```
-
-## 🧪 Example Use Cases
-
-- Onboarding flows
-- Step-by-step data collection
-- Multi-step modals
-- Form wizards
-
-## 🛠 Built With
-
-- [@gorhom/bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet)
-- [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/)
-- [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/)
-
-## 📄 License
-
-Made with ❤️ by @mahdidavoodi7
+Built by [@mehdi_made](https://x.com/mehdi_made)

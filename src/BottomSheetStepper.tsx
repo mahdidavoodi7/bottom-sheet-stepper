@@ -1,3 +1,8 @@
+/**
+ * Bottom Sheet Stepper · a free drop from Motionary
+ * Famous app interactions in React Native + Expo · https://motionary.dev
+ * MIT · feel free to steal
+ */
 import React, {
   forwardRef,
   useCallback,

@@ -1,14 +1,14 @@
 {
   "name": "bottom-sheet-stepper",
   "version": "0.1.8",
-  "description": "A lightweight and customizable stepper component for React Native, built on top of @gorhom/bottom-sheet. Easily manage multi-step flows in a modal bottom sheet with smooth animations and full control.",
+  "description": "Bottom Sheet Stepper: the self-resizing multi-step bottom sheet you see across modern fintech and crypto apps rebuilt in React Native + Expo. A free drop from https://motionary.dev",
   "main": "index.js",
   "types": "index.d.ts",
   "author": "Mehdi Davoodi",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/mahdidavoodi7/bottom-sheet-stepper.git"
+    "url": "https://github.com/mahdidavoodi7/bottom-sheet-stepper.git"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -24,25 +24,21 @@
   ],
   "keywords": [
     "react-native",
-    "bottom-sheet",
-    "stepper",
-    "wizard",
-    "multi-step",
-    "react-native-bottom-sheet",
-    "react-native-modal",
-    "react-native-stepper",
+    "expo",
+    "animations",
+    "reanimated",
+    "skia",
+    "gestures",
+    "ui",
+    "interactions",
+    "components",
     "bottom-sheet-stepper",
-    "onboarding",
-    "react-native-reanimated",
-    "gorhom",
-    "react-native-gesture-handler",
-    "react-native-component",
-    "expo"
+    "bottom-sheet"
   ],
   "bugs": {
     "url": "https://github.com/mahdidavoodi7/bottom-sheet-stepper/issues"
   },
-  "homepage": "https://github.com/mahdidavoodi7/bottom-sheet-stepper#readme",
+  "homepage": "https://motionary.dev?utm_source=npm&utm_medium=package",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
