@@ -70,16 +70,41 @@ const App = () => {
 };
 ```
 
-Each step gets `onNextPress`, `onBackPress`, and an optional `onEnd`. The sheet itself takes a few props if you want to tune it:
+Each step gets `onNextPress`, `onBackPress`, an optional `onEnd`, and whatever you hand it through `shared`. The sheet itself takes a few props if you want to tune it:
 
 | Prop | Type | What it does |
 | --- | --- | --- |
-| `steps` | `((props: StepComponentProps) => React.ReactNode)[]` | Your steps, in order |
+| `steps` | `((props: StepComponentProps<TShared>) => React.ReactNode)[]` | Your steps, in order |
+| `shared` | `TShared` | Data passed to every step, typed and inferred from what you hand it |
+| `initialStep` | `number` | Step index the flow opens on and resets to (default 0) |
 | `style` | `StyleProp<ViewStyle>` | Style for the step container |
 | `bottomInset` | `number` | Padding at the bottom (default 20) |
 | `horizontalInset` | `number` | Side margin so the card floats (default 24) |
 | `disablePanDownToClose` | `boolean` | Turn off swipe-to-close |
 | `disableBackDropPressToClose` | `boolean` | Keep taps on the backdrop from closing it |
+
+## Share data across steps
+
+Steps are render functions, so pass a `shared` object and each one receives it, fully typed. No per-step prop wiring, no cloning elements internally, inference intact:
+
+```tsx
+// `user` is your own data — its type flows into every step, no annotation needed
+<BottomSheetStepper
+  ref={stepperRef}
+  shared={{ user }}
+  initialStep={0}
+  steps={[
+    ({ shared, onNextPress }) => (
+      <AccountStep user={shared.user} onNext={onNextPress} />
+    ),
+    ({ shared, onEnd }) => (
+      <ConfirmStep user={shared.user} onDone={onEnd} />
+    ),
+  ]}
+/>;
+```
+
+`shared`'s type is inferred from what you pass, so `shared.user` is typed inside every step, no casts. Navigation state stays separate from it: `initialStep` just says where the flow opens and where it lands after closing, which keeps controlled and resumable flows easy to reason about.
 
 You drive it through the ref with `present()` and `dismiss()`. Prefer a package over a copy? `npm install bottom-sheet-stepper` works too. That's it, it's built to be stolen from.
 

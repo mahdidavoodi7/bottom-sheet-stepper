@@ -1,9 +1,14 @@
+/**
+ * Bottom Sheet Stepper · a free drop from Motionary
+ * Famous app interactions in React Native + Expo · https://motionary.dev
+ * MIT · feel free to steal
+ */
 import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState, } from 'react';
 import { StyleSheet, Platform, } from 'react-native';
 import { BottomSheetModal, BottomSheetView, ANIMATION_DURATION, ANIMATION_EASING, ANIMATION_CONFIGS, BottomSheetBackdrop, } from '@gorhom/bottom-sheet';
 import Animated, { FadeIn, FadeOut, useAnimatedStyle, useSharedValue, withSpring, withTiming, } from 'react-native-reanimated';
-const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizontalInset = 24, disablePanDownToClose }, ref) => {
-    const [step, setStep] = useState(0);
+function BottomSheetStepperInner({ steps, shared, initialStep = 0, style, bottomInset = 20, horizontalInset = 24, disablePanDownToClose, disableBackDropPressToClose, }, ref) {
+    const [step, setStep] = useState(initialStep);
     const height = useSharedValue(0);
     const transform = useSharedValue(0);
     const bottomSheetRef = useRef(null);
@@ -20,9 +25,9 @@ const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizon
         setTimeout(() => {
             height.value = 0;
             transform.value = 0;
-            setStep(0);
+            setStep(initialStep);
         }, 200);
-    }, [height, transform]);
+    }, [height, transform, initialStep]);
     const handlePressNext = useCallback(() => {
         if (step + 1 >= steps.length) {
             handleClose();
@@ -61,7 +66,7 @@ const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizon
             ],
         };
     });
-    const renderBackdrop = useCallback((backdropProps) => (<BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} onPress={handleClose}/>), [handleClose]);
+    const renderBackdrop = useCallback((backdropProps) => (<BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} onPress={disableBackDropPressToClose ? undefined : handleClose}/>), [handleClose]);
     const renderContent = useCallback(() => {
         const StepComponent = steps[step];
         if (!StepComponent)
@@ -74,9 +79,10 @@ const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizon
                 onNextPress: handlePressNext,
                 onBackPress: handlePressBack,
                 onEnd: handleClose,
+                shared: shared,
             })}
       </Animated.View>);
-    }, [handleClose, handlePressBack, handlePressNext, height, step, steps]);
+    }, [handleClose, handlePressBack, handlePressNext, height, step, steps, shared]);
     return (<BottomSheetModal detached ref={bottomSheetRef} enableDynamicSizing={true} maxDynamicContentSize={100} android_keyboardInputMode="adjustResize" style={{ marginHorizontal: horizontalInset }} handleStyle={styles.bottomSheetHandle} containerStyle={styles.bottomSheetContainer} backgroundStyle={styles.bottomSheetBackground} backdropComponent={renderBackdrop} onChange={(index) => (index === -1 ? afterClosed() : undefined)} enablePanDownToClose={disablePanDownToClose ? false : undefined}>
       <BottomSheetView style={[styles.bottomSheetView, { paddingBottom: bottomInset }]}>
         <Animated.View style={[styles.contentContainer, style, containerAnimatedStyle]}>
@@ -86,7 +92,7 @@ const BottomSheetStepper = forwardRef(({ steps, style, bottomInset = 20, horizon
         </Animated.View>
       </BottomSheetView>
     </BottomSheetModal>);
-});
+}
 const styles = StyleSheet.create({
     contentContainer: {
         alignItems: 'center',
@@ -123,5 +129,6 @@ const styles = StyleSheet.create({
         marginTop: 'auto',
     },
 });
+const BottomSheetStepper = forwardRef(BottomSheetStepperInner);
 BottomSheetStepper.displayName = 'BottomSheetStepper';
 export default BottomSheetStepper;
