@@ -2,7 +2,7 @@
 
 The self-resizing, multi-step bottom sheet you see across modern fintech and crypto apps, rebuilt in React Native + Expo.
 
-A free drop from **Motionary**. The whole flock lives at **https://motionary.dev**.
+A free drop from **Motionary**. The whole flock lives at **https://motionary.dev**. Related: [React Native action sheet reference](https://motionary.dev/components/action-sheet).
 
 <p align="center">
   <img src="https://github.com/mahdidavoodi7/bottom-sheet-stepper/blob/main/preview.gif?raw=true" alt="Preview" />
